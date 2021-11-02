@@ -2,6 +2,9 @@ package de.hsos.prog3.rene.ab02.logik;
 
 public class Simulator implements Simulation {
 
+    private int anzahlFelder;
+    private boolean[][] spielfeld;
+
     @Override
     public void berechneAnfangsGeneration(int anzahlDerZeilen, int wahrscheinlichkeitDerBesiedlung) {
 

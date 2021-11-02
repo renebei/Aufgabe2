@@ -6,7 +6,7 @@ public class SpielfeldDarstellung {
     private Interaktionsbrett ib;
 
     public SpielfeldDarstellung(Interaktionsbrett ib) {
-
+        this.ib = ib;
     }
 
     public void spielfeldDarstellen(boolean[][] spielfeld) {
@@ -14,6 +14,6 @@ public class SpielfeldDarstellung {
     }
 
     public void abwischen() {
-
+        ib.abwischen();
     }
 }
