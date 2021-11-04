@@ -6,50 +6,40 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class NutzerEingabe {
+
+    private static final int MIN_ANZAHL = 3;
+
     private EinUndAusgabe io;
-    private Scanner scan;
 
     public NutzerEingabe(EinUndAusgabe io) {
         this.io = io;
-        scan = new Scanner(System.in);
     }
 
-    public int anzahlZeilen() {
-        int zellen = 0;
-        while (zellen == 0) {
-            try {
-                System.out.print("Anzahl Zellen: ");
-                zellen = scan.nextInt();
-            } catch (InputMismatchException e) {
-                System.out.println("Keine Gültige Eingabe");
-            }
-        }
-        return zellen;
+    public int anzahlZeilenDesSpielfelds() {
+        int eingabe = 0;
+        do {
+            System.out.print("Anzahl der Zeilen des Spielfelds (>=" + MIN_ANZAHL + "): ");
+            eingabe = io.leseInteger();
+        } while (eingabe < MIN_ANZAHL);
+        return eingabe;
     }
 
     public int wahrscheinlichkeitDerBesiedlung() {
-        int wahrscheinlichkeit = 0;
-        while (wahrscheinlichkeit == 0) {
-            try {
-                System.out.print("Wahrscheinlichkeit: ");
-                wahrscheinlichkeit = (scan.nextInt() < 101 && scan.nextInt() > 0) ? scan.nextInt() : 0;
-            } catch (InputMismatchException e) {
-                System.out.println("Keine Gültige Eingabe");
-            }
-        }
-        return wahrscheinlichkeit;
+        int eingabe = 0;
+        do {
+            System.out.print("Wahrscheinlichkeit der Besiedlung (1-100): ");
+            eingabe = io.leseInteger();
+        } while (eingabe < 1 || 100 < eingabe);
+        return eingabe;
     }
 
     public int anzahlDerSimulationsschritte() {
-        int schritte = 0;
-        while (schritte == 0) {
-            try {
-                System.out.print("Wahrscheinlichkeit: ");
-                schritte = scan.nextInt();
-            } catch (InputMismatchException e) {
-                System.out.println("Keine Gültige Eingabe");
-            }
+        int eingabe = 0;
+        System.out.print("Anzahl der Simulationsschritte (>=1): ");
+        eingabe = io.leseInteger();
+        if (eingabe < 1) {
+            eingabe = -1;
         }
-        return schritte;
+        return eingabe;
     }
 }

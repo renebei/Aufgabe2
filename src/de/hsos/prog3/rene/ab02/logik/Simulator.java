@@ -3,6 +3,7 @@ package de.hsos.prog3.rene.ab02.logik;
 public class Simulator implements Simulation {
 
     private int anzahlFelder;
+    private BeiAenderung beiAenderung;
     private boolean[][] spielfeld;
 
     @Override
