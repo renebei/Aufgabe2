@@ -4,8 +4,8 @@ import de.hsos.prog3.rene.ab02.util.Interaktionsbrett;
 
 public class SpielfeldDarstellung {
     private Interaktionsbrett ib;
-    private static final int SEITENLAENGE = 10;
-    private static final int MARGIN = 1;
+    private static final int SEITENLAENGE = 30;
+    private static final int MARGIN = 3;
 
     public SpielfeldDarstellung(Interaktionsbrett ib) {
         this.ib = ib;

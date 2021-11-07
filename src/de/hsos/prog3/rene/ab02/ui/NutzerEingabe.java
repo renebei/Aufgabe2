@@ -2,8 +2,6 @@ package de.hsos.prog3.rene.ab02.ui;
 
 import de.hsos.prog3.rene.ab02.util.EinUndAusgabe;
 
-import java.util.InputMismatchException;
-import java.util.Scanner;
 
 public class NutzerEingabe {
 

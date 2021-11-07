@@ -1,9 +1,8 @@
-package de.hsos.prog3.rene.ab02;
+package de.hsos.prog3.rene.ab02.ui;
 
 import de.hsos.prog3.rene.ab02.logik.Simulator;
-import de.hsos.prog3.rene.ab02.ui.Steuerung;
 
-public class App {
+public class Main {
 
     public static void main(String[] args) {
         Simulator simulator = new Simulator();
@@ -15,5 +14,7 @@ public class App {
             anzahlDerSimulationsschritte = steuerung.getNutzerEingabe().anzahlDerSimulationsschritte();
             simulator.berechneFolgeGeneration(anzahlDerSimulationsschritte);
         } while (anzahlDerSimulationsschritte != -1);
+
+        System.exit(0);
     }
 }
