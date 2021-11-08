@@ -5,7 +5,7 @@ import de.hsos.prog3.rene.ab02.util.EinUndAusgabe;
 
 public class NutzerEingabe {
 
-    private static final int MIN_ANZAHL = 3;
+    private static final int MIN_ROWS = 3;
 
     private EinUndAusgabe io;
 
@@ -14,30 +14,30 @@ public class NutzerEingabe {
     }
 
     public int anzahlZeilenDesSpielfelds() {
-        int eingabe = 0;
+        int input = 0;
         do {
-            System.out.print("Anzahl der Zeilen des Spielfelds (>=" + MIN_ANZAHL + "): ");
-            eingabe = io.leseInteger();
-        } while (eingabe < MIN_ANZAHL);
-        return eingabe;
+            System.out.print("Anzahl der Zeilen des Spielfelds (>=" + MIN_ROWS + "): ");
+            input = io.leseInteger();
+        } while (input < MIN_ROWS);
+        return input;
     }
 
     public int wahrscheinlichkeitDerBesiedlung() {
-        int eingabe = 0;
+        int input = 0;
         do {
             System.out.print("Wahrscheinlichkeit der Besiedlung (1-100): ");
-            eingabe = io.leseInteger();
-        } while (eingabe < 1 || 100 < eingabe);
-        return eingabe;
+            input = io.leseInteger();
+        } while (input < 1 || 100 < input);
+        return input;
     }
 
     public int anzahlDerSimulationsschritte() {
-        int eingabe = 0;
+        int input = 0;
         System.out.print("Anzahl der Simulationsschritte (>=1): ");
-        eingabe = io.leseInteger();
-        if (eingabe < 1) {
-            eingabe = -1;
+        input = io.leseInteger();
+        if (input < 1) {
+            input = -1;
         }
-        return eingabe;
+        return input;
     }
 }

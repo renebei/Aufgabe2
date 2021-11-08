@@ -11,16 +11,13 @@ public class Simulator implements Simulation {
     @Override
     public void berechneAnfangsGeneration(int anzahlDerZeilen, int wahrscheinlichkeitDerBesiedelung) {
         anzahlFelder = anzahlDerZeilen;
-
         Random random = new Random();
-
         spielfeld = new boolean[anzahlDerZeilen][anzahlDerZeilen];
         for (int y = 0; y < anzahlDerZeilen; y++) {
             for (int x = 0; x < anzahlFelder; x++) {
                 spielfeld[y][x] = random.nextInt(100) < wahrscheinlichkeitDerBesiedelung;
             }
         }
-
         if (beiAenderung != null) {
             beiAenderung.aktualisiere(spielfeld);
         }
@@ -34,22 +31,22 @@ public class Simulator implements Simulation {
             for (int y = 0; y < anzahlFelder; y++) {
                 for (int x = 0; x < anzahlFelder; x++) {
                     int count = spielfeld[y][x] ? -1 : 0;
-                    for (int ry = -1; ry <= 1; ry++) {
-                        for (int rx = -1; rx <= 1; rx++) {
-                            if (0 <= y + ry && y + ry < anzahlFelder && 0 <= x + rx && x + rx < anzahlFelder) {
-                                if (spielfeld[y + ry][x + rx]) {
-                                    count++;
+                    for (int y2 = -1; y2 <= 1; y2++) { //-1 oben, 0 mitte, 1 unten
+                        for (int x2 = -1; x2 <= 1; x2++) {
+                            if (0 <= y + y2 && y + y2 < anzahlFelder && 0 <= x + x2 && x + x2 < anzahlFelder) {
+                                if (spielfeld[y + y2][x + x2]) {
+                                    count++; //wenn true nachbar
                                 }
                             }
                         }
                     }
 
                     if (count == 2) {
-                        neuesSpielfeld[y][x] = spielfeld[y][x];
+                        neuesSpielfeld[y][x] = spielfeld[y][x]; //bleibt wie sie ist
                     } else if (count == 3) {
-                        neuesSpielfeld[y][x] = true;
+                        neuesSpielfeld[y][x] = true; //bei 3 immer bewohnt
                     } else {
-                        neuesSpielfeld[y][x] = false;
+                        neuesSpielfeld[y][x] = false; //sonst immer unbewohnt
                     }
                 }
             }
@@ -64,7 +61,7 @@ public class Simulator implements Simulation {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-        });
+        }
 
     }
 
