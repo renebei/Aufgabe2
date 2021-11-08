@@ -30,7 +30,7 @@ public class Simulator implements Simulation {
 
             for (int y = 0; y < anzahlFelder; y++) {
                 for (int x = 0; x < anzahlFelder; x++) {
-                    int count = spielfeld[y][x] ? -1 : 0;
+                    int count = spielfeld[y][x] ? -1 : 0; //Testfeld als Nachbar ausschließen
                     for (int y2 = -1; y2 <= 1; y2++) { //-1 oben, 0 mitte, 1 unten
                         for (int x2 = -1; x2 <= 1; x2++) {
                             if (0 <= y + y2 && y + y2 < anzahlFelder && 0 <= x + x2 && x + x2 < anzahlFelder) {
