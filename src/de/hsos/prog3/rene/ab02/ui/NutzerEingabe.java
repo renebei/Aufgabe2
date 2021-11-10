@@ -5,7 +5,7 @@ import de.hsos.prog3.rene.ab02.util.EinUndAusgabe;
 
 public class NutzerEingabe {
 
-    private static final int MIN_ROWS = 3;
+    private static final int MIN_ROWS = 10;
 
     private EinUndAusgabe io;
 
@@ -13,10 +13,10 @@ public class NutzerEingabe {
         this.io = io;
     }
 
-    public int anzahlZeilenDesSpielfelds() {
+    public int anzahlZellenDesSpielfelds() {
         int input = 0;
         do {
-            System.out.print("Anzahl der Zeilen des Spielfelds (>=" + MIN_ROWS + "): ");
+            System.out.print("Anzahl der Zellen des Spielfelds (>=" + MIN_ROWS + "): ");
             input = io.leseInteger();
         } while (input < MIN_ROWS);
         return input;
@@ -33,11 +33,9 @@ public class NutzerEingabe {
 
     public int anzahlDerSimulationsschritte() {
         int input = 0;
-        System.out.print("Anzahl der Simulationsschritte (>=1): ");
+        System.out.print("Anzahl der Simulationsschritte ( <1 Abbruch): ");
         input = io.leseInteger();
-        if (input < 1) {
-            input = -1;
-        }
+        if (input < 1) System.exit(0);
         return input;
     }
 }

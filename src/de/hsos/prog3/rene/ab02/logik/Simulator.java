@@ -9,61 +9,62 @@ public class Simulator implements Simulation {
     private boolean[][] spielfeld;
 
     @Override
-    public void berechneAnfangsGeneration(int anzahlDerZeilen, int wahrscheinlichkeitDerBesiedelung) {
-        anzahlFelder = anzahlDerZeilen;
+    public void berechneAnfangsGeneration(int anzahlDerZellen, int wahrscheinlichkeitDerBesiedelung) {
+        anzahlFelder = anzahlDerZellen;
         Random random = new Random();
-        spielfeld = new boolean[anzahlDerZeilen][anzahlDerZeilen];
-        for (int y = 0; y < anzahlDerZeilen; y++) {
+        spielfeld = new boolean[anzahlDerZellen][anzahlDerZellen];
+
+        for (int y = 0; y < anzahlFelder; y++) {
             for (int x = 0; x < anzahlFelder; x++) {
                 spielfeld[y][x] = random.nextInt(100) < wahrscheinlichkeitDerBesiedelung;
             }
         }
-        if (beiAenderung != null) {
-            beiAenderung.aktualisiere(spielfeld);
-        }
+
+        if (beiAenderung != null) beiAenderung.aktualisiere(spielfeld);
+
     }
 
     @Override
     public void berechneFolgeGeneration(int berechnungsschritte) {
         for (int i = 0; i < berechnungsschritte; i++) {
-            boolean[][] neuesSpielfeld = new boolean[anzahlFelder][anzahlFelder];
+            boolean[][] neuSpielfeld = new boolean[anzahlFelder][anzahlFelder];
 
             for (int y = 0; y < anzahlFelder; y++) {
                 for (int x = 0; x < anzahlFelder; x++) {
-                    int count = spielfeld[y][x] ? -1 : 0; //Testfeld als Nachbar ausschließen
-                    for (int y2 = -1; y2 <= 1; y2++) { //-1 oben, 0 mitte, 1 unten
-                        for (int x2 = -1; x2 <= 1; x2++) {
-                            if (0 <= y + y2 && y + y2 < anzahlFelder && 0 <= x + x2 && x + x2 < anzahlFelder) {
-                                if (spielfeld[y + y2][x + x2]) {
-                                    count++; //wenn true nachbar
-                                }
-                            }
-                        }
-                    }
 
-                    if (count == 2) {
-                        neuesSpielfeld[y][x] = spielfeld[y][x]; //bleibt wie sie ist
-                    } else if (count == 3) {
-                        neuesSpielfeld[y][x] = true; //bei 3 immer bewohnt
-                    } else {
-                        neuesSpielfeld[y][x] = false; //sonst immer unbewohnt
-                    }
+                    int anzahlNachbarn = zaehleNachbarn(y, x);
+
+                    if (anzahlNachbarn == 2) neuSpielfeld[y][x] = spielfeld[y][x]; //bleibt wie sie ist
+                    else if (anzahlNachbarn == 3) neuSpielfeld[y][x] = true; //bei 3 immer bewohnt
+                    else neuSpielfeld[y][x] = false; //sonst immer unbewohnt
+
                 }
             }
-            spielfeld = neuesSpielfeld;
 
-            if (beiAenderung != null) {
-                beiAenderung.aktualisiere(spielfeld);
-            }
+            if(spielfeld != neuSpielfeld)spielfeld = neuSpielfeld;
+
+            if (beiAenderung != null) beiAenderung.aktualisiere(spielfeld);
 
             try {
                 Thread.sleep(150);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                System.err.println(e);
             }
         }
-
     }
+
+    private int zaehleNachbarn(int y, int x) {
+        int count = spielfeld[y][x] ? -1 : 0; //Testfeld als Nachbar ausschließen
+        for (int yNr = -1; yNr <= 1; yNr++) { //-1 oben, 0 mitte, 1 unten
+            for (int xNr = -1; xNr <= 1; xNr++) {
+                if (0 <= y + yNr && y + yNr < anzahlFelder && 0 <= x + xNr && x + xNr < anzahlFelder) {
+                    if (spielfeld[y + yNr][x + xNr]) count++; //wenn true nachbar
+                }
+            }
+        }
+        return count;
+    }
+
 
     @Override
     public void anmeldenFuerAktualisierungBeiAenderung(BeiAenderung beiAenderung) {

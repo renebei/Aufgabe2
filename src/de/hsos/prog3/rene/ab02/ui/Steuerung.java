@@ -15,23 +15,18 @@ public class Steuerung implements BeiAenderung {
         this.simulation = simulation;
     }
 
-
     public NutzerEingabe getNutzerEingabe() {
         return nutzerEingabe;
     }
 
     public void startDesSpiels() {
         initialisierung();
-
-        int anzahlZeilenDesSpielfelds = nutzerEingabe.anzahlZeilenDesSpielfelds();
-        int wahrscheinlichkeitDerBesiedlung = nutzerEingabe.wahrscheinlichkeitDerBesiedlung();
-        simulation.berechneAnfangsGeneration(anzahlZeilenDesSpielfelds, wahrscheinlichkeitDerBesiedlung);
+        simulation.berechneAnfangsGeneration(nutzerEingabe.anzahlZellenDesSpielfelds(), nutzerEingabe.wahrscheinlichkeitDerBesiedlung());
     }
 
     private void initialisierung() {
         EinUndAusgabe einUndAusgabe = new EinUndAusgabe();
         nutzerEingabe = new NutzerEingabe(einUndAusgabe);
-
         Interaktionsbrett interaktionsbrett = new Interaktionsbrett();
         spielfeldDarstellung = new SpielfeldDarstellung(interaktionsbrett);
 
@@ -39,7 +34,7 @@ public class Steuerung implements BeiAenderung {
     }
 
     public void aktualisiere(boolean[][] neueGeneration) {
-        spielfeldDarstellung.abwischen();
-        spielfeldDarstellung.spielfeldDarstellen(neueGeneration);
+        spielfeldDarstellung.abwischen(); //alt weg
+        spielfeldDarstellung.spielfeldDarstellen(neueGeneration); //neu hin
     }
 }

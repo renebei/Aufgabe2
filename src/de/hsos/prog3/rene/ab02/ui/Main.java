@@ -9,12 +9,11 @@ public class Main {
         Steuerung steuerung = new Steuerung(simulator);
         steuerung.startDesSpiels();
 
-        int anzahlDerSimulationsschritte;
-        do {
+        int anzahlDerSimulationsschritte = 1;
+
+        while (anzahlDerSimulationsschritte > 0) {
             anzahlDerSimulationsschritte = steuerung.getNutzerEingabe().anzahlDerSimulationsschritte();
             simulator.berechneFolgeGeneration(anzahlDerSimulationsschritte);
-        } while (anzahlDerSimulationsschritte != -1);
-
-        System.exit(0);
+        }
     }
 }
